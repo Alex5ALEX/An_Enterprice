@@ -42,7 +42,7 @@ public class ProductController : Controller
     [HttpPost]
     public async Task<IActionResult> Set([FromBody] Product product)
     {
-        product.Id = new Guid();
+        //product.Id = new Guid();
 
         _context.Products.Add(product);
         _context.SaveChanges();

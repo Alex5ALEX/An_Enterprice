@@ -10,21 +10,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using EnterpriseClient.Views.RowsView;
+
 namespace EnterpriseClient.Views.SupplyView;
 
 public partial class SupplyAdd : UserControl
 {
-    private OrderControl mainController;
-    private List<ProductShortRow> productRow { get; set; } = [];
-    private List<CustomerShortRow> customerRow { get; set; } = [];
-    private List<EmployeeShortRow> employeeRow { get; set; } = [];
+    private SupplyControl mainController;
 
-    public Customer choisedCustomer { get; set; } = new Customer() { Id = Guid.Empty };
-    public Employee choisedEmployee { get; set; } = new Employee() { Id = Guid.Empty };
+    private List<MaterialShortRow> materialRow { get; set; } = [];
+    private List<ProviderShortRow> providerRow { get; set; } = [];
 
 
+    public Provider choisedProvider { get; set; } = new Provider() { Id = Guid.Empty};
 
-    public OrderAddController(OrderControl mainController)
+
+
+    public SupplyAdd(SupplyControl mainController)
     {
         this.mainController = mainController;
 
@@ -41,126 +43,98 @@ public partial class SupplyAdd : UserControl
     {
         mainController.HideActionGroupBox();
     }
-
+    
 
 
     //data
     public async void InitData()
     {
-        InitProducts();
-        InitCustomers();
-        InitEmployee();
+        InitMaterials();
+        InitProviders();
     }
 
-
-    public async void InitProducts()
+    public async void InitMaterials()
     {
-        flowLayoutPanelProducts.Controls.Clear();
-        productRow.Clear();
+        flowLayoutPanelMaterial.Controls.Clear();
+        materialRow.Clear();
 
-        var products = await mainController.productController.GetAllProductsAsync();
+        var materials = await mainController.materialController.GetAll();
 
-        foreach (var item in products)
+        foreach(var item in materials)
         {
-            var token = new ProductShortRow(item);
-            productRow.Add(token);
-            flowLayoutPanelProducts.Controls.Add(token);
+            var token = new MaterialShortRow(item);
+            token.SupplyLabel();
+            materialRow.Add(token);
+            flowLayoutPanelMaterial.Controls.Add(token);
         }
 
     }
 
-    public async void InitCustomers()
+    public async void InitProviders()
     {
-        flowLayoutPanelCustomers.Controls.Clear();
-        customerRow.Clear();
+        flowLayoutPanelProvider.Controls.Clear();
+        providerRow.Clear();
 
-        var customers = await mainController.customerController.GetAllCustomersAsync();
+        var providers = await mainController.providerController.GetAll();
 
-        foreach (var item in customers)
+        foreach(var item in providers)
         {
-            var token = new CustomerShortRow(this, item);
-            customerRow.Add(token);
-            flowLayoutPanelCustomers.Controls.Add(token);
+            var token = new ProviderShortRow(this, item);
+            providerRow.Add(token);
+            flowLayoutPanelProvider.Controls.Add(token);
         }
     }
-
-    public async void InitEmployee()
-    {
-        flowLayoutPanelEmployers.Controls.Clear();
-        employeeRow.Clear();
-
-        var employee = await mainController.employeeController.GetAllEmployersAsync();
-
-        foreach (var item in employee)
-        {
-            var token = new EmployeeShortRow(this, item);
-            employeeRow.Add(token);
-            flowLayoutPanelEmployers.Controls.Add(token);
-        }
-    }
-
 
 
     //action
 
-    public void ShowCustomer()
+    public void ShowProvider()
     {
-        label1.Text = choisedCustomer.Name;
-        label2.Text = choisedCustomer.Surname;
-        label3.Text = choisedCustomer.Phone;
-        label4.Text = choisedCustomer.Email;
+        label1.Text = choisedProvider.Company;
+        label2.Text = choisedProvider.ContactPerson;
+        label3.Text = choisedProvider.Phone;
+        label4.Text = choisedProvider.Email;
+        label5.Text = choisedProvider.Address;
     }
-
-    public void ShowEmployee()
-    {
-        label8.Text = choisedEmployee.Name;
-        label7.Text = choisedEmployee.Surname;
-        label6.Text = choisedEmployee.Phone;
-        label5.Text = choisedEmployee.Email;
-    }
-
-
 
 
     private async void AddItem(object? sender, EventArgs e)
     {
         //проверка что пользователь ввел все поля
-        if (choisedCustomer.Id == Guid.Empty ||
-        choisedEmployee.Id == Guid.Empty)
+        if (choisedProvider.Id == Guid.Empty)
         {
             MessageBox.Show("Пожалуйста, выберите работника/покупателя.");
             return;
         }
 
-
-        Order order = new Order()
+        Supply supply = new Supply()
         {
             Id = Guid.NewGuid(),
             Date = dateTimePicker.Value,
-            Id_Customer = choisedCustomer.Id,
-            Id_Employee = choisedEmployee.Id
+            Description = richTextBox1.Text,
+            Id_Provider = choisedProvider.Id
         };
 
-        var response = await mainController.orderController.PostOrder(order);
+        var response = await mainController.supplyController.Post(supply);
 
         if (!response.IsSuccessStatusCode)
         {
             return;
         }
 
-        foreach (var item in productRow)
+        foreach (var item in materialRow)
         {
             if (item.GetQuantity() > 0)
             {
-                OrderCompaund compaund = new OrderCompaund()
+                SupplyCompaund compaund = new SupplyCompaund()
                 {
-                    Id_Order = order.Id,
-                    Id_Product = item.product.Id,
+                    Id_Supply = supply.Id,
+                    Id_Material = item.Material.Id,
                     Quantity = item.GetQuantity()
                 };
 
 
-                var responseCompaund = await mainController.orderCompaundController.PostOrderCompaund(compaund);
+                var responseCompaund = await mainController.SupplyCompaundController.Post(compaund);
 
                 if (responseCompaund.IsSuccessStatusCode) { continue; }
 
@@ -169,15 +143,11 @@ public partial class SupplyAdd : UserControl
 
 
         dateTimePicker.Value = DateTime.Now;
-        choisedCustomer = new Customer();
-        choisedEmployee = new Employee();
-        ShowCustomer();
-        ShowEmployee();
+        choisedProvider = new Provider();
+        richTextBox1.Text = ""; 
+        ShowProvider();
         InitData();
         mainController.UpdateData();
-
-
-
     }
 
 }

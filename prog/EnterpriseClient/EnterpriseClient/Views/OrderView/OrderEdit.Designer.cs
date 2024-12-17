@@ -1,6 +1,6 @@
-﻿namespace EnterpriseClient.Views.SupplyView
+﻿namespace EnterpriseClient.Views.OrderView
 {
-    partial class SupplyAdd
+    partial class OrderEdit
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -29,38 +29,40 @@
         private void InitializeComponent()
         {
             groupBox2 = new GroupBox();
-            richTextBox1 = new RichTextBox();
-            label6 = new Label();
             groupBox4 = new GroupBox();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
+            buttonDelete = new Button();
             buttonBack = new Button();
-            buttonAdd = new Button();
+            richTextBox1 = new RichTextBox();
+            buttonEdit = new Button();
+            label6 = new Label();
             tabControl = new TabControl();
-            tabPageMaterial = new TabPage();
-            flowLayoutPanelMaterial = new FlowLayoutPanel();
-            tabPageProvider = new TabPage();
-            flowLayoutPanelProvider = new FlowLayoutPanel();
+            tabPageProducts = new TabPage();
+            flowLayoutPanelProducts = new FlowLayoutPanel();
             dateTimePicker = new DateTimePicker();
             label = new Label();
             labelDate = new Label();
+            tabPageCustomer = new TabPage();
+            flowLayoutPanelCustomer = new FlowLayoutPanel();
             groupBox2.SuspendLayout();
             groupBox4.SuspendLayout();
             tabControl.SuspendLayout();
-            tabPageMaterial.SuspendLayout();
-            tabPageProvider.SuspendLayout();
+            tabPageProducts.SuspendLayout();
+            tabPageCustomer.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(richTextBox1);
-            groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(groupBox4);
+            groupBox2.Controls.Add(buttonDelete);
             groupBox2.Controls.Add(buttonBack);
-            groupBox2.Controls.Add(buttonAdd);
+            groupBox2.Controls.Add(richTextBox1);
+            groupBox2.Controls.Add(buttonEdit);
+            groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(tabControl);
             groupBox2.Controls.Add(dateTimePicker);
             groupBox2.Controls.Add(label);
@@ -68,26 +70,8 @@
             groupBox2.Location = new Point(0, 0);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(680, 615);
-            groupBox2.TabIndex = 14;
+            groupBox2.TabIndex = 15;
             groupBox2.TabStop = false;
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(15, 149);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(282, 147);
-            richTextBox1.TabIndex = 20;
-            richTextBox1.Text = "";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 12F);
-            label6.Location = new Point(15, 125);
-            label6.Name = "label6";
-            label6.Size = new Size(86, 21);
-            label6.TabIndex = 19;
-            label6.Text = "Desciption:";
             // 
             // groupBox4
             // 
@@ -97,12 +81,12 @@
             groupBox4.Controls.Add(label2);
             groupBox4.Controls.Add(label1);
             groupBox4.Font = new Font("Segoe UI", 12F);
-            groupBox4.Location = new Point(15, 302);
+            groupBox4.Location = new Point(15, 312);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(282, 220);
-            groupBox4.TabIndex = 18;
+            groupBox4.TabIndex = 35;
             groupBox4.TabStop = false;
-            groupBox4.Text = "Provider";
+            groupBox4.Text = "Customer";
             // 
             // label5
             // 
@@ -144,34 +128,67 @@
             label1.Size = new Size(0, 21);
             label1.TabIndex = 0;
             // 
+            // buttonDelete
+            // 
+            buttonDelete.BackColor = Color.Red;
+            buttonDelete.FlatStyle = FlatStyle.Flat;
+            buttonDelete.Font = new Font("Segoe UI", 12F);
+            buttonDelete.ForeColor = SystemColors.ControlText;
+            buttonDelete.Location = new Point(111, 559);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Size = new Size(90, 50);
+            buttonDelete.TabIndex = 34;
+            buttonDelete.Text = "Delete";
+            buttonDelete.UseVisualStyleBackColor = false;
+            // 
             // buttonBack
             // 
-            buttonBack.BackColor = SystemColors.ControlLightLight;
             buttonBack.FlatStyle = FlatStyle.Flat;
             buttonBack.Font = new Font("Segoe UI", 12F);
-            buttonBack.Location = new Point(6, 559);
+            buttonBack.ForeColor = SystemColors.ControlText;
+            buttonBack.Location = new Point(9, 559);
             buttonBack.Name = "buttonBack";
-            buttonBack.Size = new Size(100, 50);
-            buttonBack.TabIndex = 17;
+            buttonBack.Size = new Size(90, 50);
+            buttonBack.TabIndex = 33;
             buttonBack.Text = "Back";
-            buttonBack.UseVisualStyleBackColor = false;
+            buttonBack.UseVisualStyleBackColor = true;
             // 
-            // buttonAdd
+            // richTextBox1
             // 
-            buttonAdd.BackColor = Color.SpringGreen;
-            buttonAdd.FlatStyle = FlatStyle.Flat;
-            buttonAdd.Font = new Font("Segoe UI", 12F);
-            buttonAdd.Location = new Point(197, 559);
-            buttonAdd.Name = "buttonAdd";
-            buttonAdd.Size = new Size(100, 50);
-            buttonAdd.TabIndex = 16;
-            buttonAdd.Text = "Add";
-            buttonAdd.UseVisualStyleBackColor = false;
+            richTextBox1.Font = new Font("Segoe UI", 12F);
+            richTextBox1.Location = new Point(15, 149);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(282, 147);
+            richTextBox1.TabIndex = 20;
+            richTextBox1.Text = "";
+            // 
+            // buttonEdit
+            // 
+            buttonEdit.BackColor = Color.Aqua;
+            buttonEdit.FlatStyle = FlatStyle.Flat;
+            buttonEdit.Font = new Font("Segoe UI", 12F);
+            buttonEdit.ForeColor = SystemColors.ControlText;
+            buttonEdit.Location = new Point(211, 559);
+            buttonEdit.Name = "buttonEdit";
+            buttonEdit.Size = new Size(90, 50);
+            buttonEdit.TabIndex = 32;
+            buttonEdit.Text = "Edit";
+            buttonEdit.UseVisualStyleBackColor = false;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 12F);
+            label6.Location = new Point(15, 125);
+            label6.Name = "label6";
+            label6.Size = new Size(86, 21);
+            label6.TabIndex = 19;
+            label6.Text = "Desciption:";
             // 
             // tabControl
             // 
-            tabControl.Controls.Add(tabPageMaterial);
-            tabControl.Controls.Add(tabPageProvider);
+            tabControl.Controls.Add(tabPageProducts);
+            tabControl.Controls.Add(tabPageCustomer);
             tabControl.Font = new Font("Segoe UI", 12F);
             tabControl.Location = new Point(312, 19);
             tabControl.Name = "tabControl";
@@ -179,43 +196,24 @@
             tabControl.Size = new Size(362, 590);
             tabControl.TabIndex = 15;
             // 
-            // tabPageMaterial
+            // tabPageProducts
             // 
-            tabPageMaterial.Controls.Add(flowLayoutPanelMaterial);
-            tabPageMaterial.Location = new Point(4, 30);
-            tabPageMaterial.Name = "tabPageMaterial";
-            tabPageMaterial.Padding = new Padding(3);
-            tabPageMaterial.Size = new Size(354, 556);
-            tabPageMaterial.TabIndex = 0;
-            tabPageMaterial.Text = "Materials";
-            tabPageMaterial.UseVisualStyleBackColor = true;
+            tabPageProducts.Controls.Add(flowLayoutPanelProducts);
+            tabPageProducts.Location = new Point(4, 30);
+            tabPageProducts.Name = "tabPageProducts";
+            tabPageProducts.Padding = new Padding(3);
+            tabPageProducts.Size = new Size(354, 556);
+            tabPageProducts.TabIndex = 0;
+            tabPageProducts.Text = "Products";
+            tabPageProducts.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanelMaterial
+            // flowLayoutPanelProducts
             // 
-            flowLayoutPanelMaterial.AutoScroll = true;
-            flowLayoutPanelMaterial.Location = new Point(0, 0);
-            flowLayoutPanelMaterial.Name = "flowLayoutPanelMaterial";
-            flowLayoutPanelMaterial.Size = new Size(354, 556);
-            flowLayoutPanelMaterial.TabIndex = 0;
-            // 
-            // tabPageProvider
-            // 
-            tabPageProvider.Controls.Add(flowLayoutPanelProvider);
-            tabPageProvider.Location = new Point(4, 30);
-            tabPageProvider.Name = "tabPageProvider";
-            tabPageProvider.Padding = new Padding(3);
-            tabPageProvider.Size = new Size(354, 556);
-            tabPageProvider.TabIndex = 1;
-            tabPageProvider.Text = "Provider";
-            tabPageProvider.UseVisualStyleBackColor = true;
-            // 
-            // flowLayoutPanelProvider
-            // 
-            flowLayoutPanelProvider.AutoScroll = true;
-            flowLayoutPanelProvider.Location = new Point(0, 0);
-            flowLayoutPanelProvider.Name = "flowLayoutPanelProvider";
-            flowLayoutPanelProvider.Size = new Size(354, 556);
-            flowLayoutPanelProvider.TabIndex = 0;
+            flowLayoutPanelProducts.AutoScroll = true;
+            flowLayoutPanelProducts.Location = new Point(0, 0);
+            flowLayoutPanelProducts.Name = "flowLayoutPanelProducts";
+            flowLayoutPanelProducts.Size = new Size(354, 556);
+            flowLayoutPanelProducts.TabIndex = 0;
             // 
             // dateTimePicker
             // 
@@ -232,9 +230,9 @@
             label.Font = new Font("Segoe UI", 20F);
             label.Location = new Point(6, 19);
             label.Name = "label";
-            label.Size = new Size(154, 37);
+            label.Size = new Size(138, 37);
             label.TabIndex = 0;
-            label.Text = "Add Supply";
+            label.Text = "Edit Order";
             // 
             // labelDate
             // 
@@ -246,44 +244,64 @@
             labelDate.TabIndex = 1;
             labelDate.Text = "Date:";
             // 
-            // SupplyAdd
+            // tabPageCustomer
+            // 
+            tabPageCustomer.Controls.Add(flowLayoutPanelCustomer);
+            tabPageCustomer.Location = new Point(4, 30);
+            tabPageCustomer.Name = "tabPageCustomer";
+            tabPageCustomer.Padding = new Padding(3);
+            tabPageCustomer.Size = new Size(354, 556);
+            tabPageCustomer.TabIndex = 1;
+            tabPageCustomer.Text = "Customers";
+            tabPageCustomer.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanelCustomer
+            // 
+            flowLayoutPanelCustomer.AutoScroll = true;
+            flowLayoutPanelCustomer.Location = new Point(0, 0);
+            flowLayoutPanelCustomer.Name = "flowLayoutPanelCustomer";
+            flowLayoutPanelCustomer.Size = new Size(354, 556);
+            flowLayoutPanelCustomer.TabIndex = 1;
+            // 
+            // OrderEdit
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
             Controls.Add(groupBox2);
-            Name = "SupplyAdd";
+            Name = "OrderEdit";
             Size = new Size(680, 615);
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
             tabControl.ResumeLayout(false);
-            tabPageMaterial.ResumeLayout(false);
-            tabPageProvider.ResumeLayout(false);
+            tabPageProducts.ResumeLayout(false);
+            tabPageCustomer.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private GroupBox groupBox2;
-        private GroupBox groupBox4;
+        private Button buttonDelete;
         private Button buttonBack;
-        private Button buttonAdd;
+        private RichTextBox richTextBox1;
+        private Button buttonEdit;
+        private Label label6;
         private TabControl tabControl;
-        private TabPage tabPageMaterial;
-        private FlowLayoutPanel flowLayoutPanelMaterial;
-        private TabPage tabPageProvider;
-        private FlowLayoutPanel flowLayoutPanelProvider;
+        private TabPage tabPageProducts;
+        private FlowLayoutPanel flowLayoutPanelProducts;
         private DateTimePicker dateTimePicker;
         private Label label;
         private Label labelDate;
+        private GroupBox groupBox4;
         private Label label5;
         private Label label4;
         private Label label3;
         private Label label2;
         private Label label1;
-        private RichTextBox richTextBox1;
-        private Label label6;
+        private TabPage tabPageCustomer;
+        private FlowLayoutPanel flowLayoutPanelCustomer;
     }
 }

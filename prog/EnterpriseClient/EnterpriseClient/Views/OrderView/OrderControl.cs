@@ -11,24 +11,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace EnterpriseClient.Views.SupplyView;
+namespace EnterpriseClient.Views.OrderView;
 
-public partial class SupplyControl : UserControl
+public partial class OrderControl : UserControl
 {
     private MainForm mainForm;
-    public SupplyController supplyController;
-    public SupplyCompaundController SupplyCompaundController;
-    public ProviderController providerController;
-    public MaterialController materialController;
-    private SupplyAdd supplyAdd;
+    public OrderController orderController;
+    public OrderCompaundController orderCompaundController;
+    public CustomerController customerController;
+    public ProductController productController;
+    private OrderAdd orderAdd;
 
-    public List<Supply> supplies { get; set; }
+    public List<Order> orders { get; set; }
 
-    public Supply choisedSupply { get; set; }
+    public Order choisedOrder { get; set; }
 
 
 
-    public SupplyControl(MainForm mainForm)
+    public OrderControl(MainForm mainForm)
     {
         this.mainForm = mainForm;
 
@@ -46,12 +46,15 @@ public partial class SupplyControl : UserControl
 
     public void InitializeData()
     {
-        choisedSupply = new Supply();
-        supplyController = new SupplyController(mainForm.httpClient);
-        SupplyCompaundController = new SupplyCompaundController(mainForm.httpClient);
-        providerController = new ProviderController(mainForm.httpClient);
-        materialController = new MaterialController(mainForm.httpClient);
-        supplyAdd = new SupplyAdd(this);
+        choisedOrder = new Order();
+
+        orderController = new OrderController(mainForm.httpClient);
+        orderCompaundController = new OrderCompaundController(mainForm.httpClient);
+        customerController = new CustomerController(mainForm.httpClient);
+        productController = new ProductController(mainForm.httpClient);
+
+
+        orderAdd = new OrderAdd(this);
     }
 
 
@@ -59,11 +62,11 @@ public partial class SupplyControl : UserControl
     {
         flowLayoutPanel1.Controls.Clear();
 
-        supplies = await supplyController.GetAll();
+        orders = await orderController.GetAll();
 
-        foreach (var supply in supplies)
+        foreach (var order in orders)
         {
-            flowLayoutPanel1.Controls.Add(new SupplyRow(this, supply));
+            flowLayoutPanel1.Controls.Add(new OrderRow(this, order));
         }
     }
 
@@ -77,16 +80,16 @@ public partial class SupplyControl : UserControl
     {
         //pictureBox.Visible = false;
         groupBoxAction.Controls.Clear();
-        groupBoxAction.Controls.Add(supplyAdd);
+        groupBoxAction.Controls.Add(orderAdd);
     }
 
     private void Edit(object sender, EventArgs e)
     {
-        if (choisedSupply.Id == Guid.Empty) { return; }
+        if (choisedOrder.Id == Guid.Empty) { return; }
 
         //pictureBox.Visible = false;
         groupBoxAction.Controls.Clear();
-        groupBoxAction.Controls.Add(new SupplyEdit(this, choisedSupply));
+        groupBoxAction.Controls.Add(new OrderEdit(this, choisedOrder));
     }
 
 }

@@ -1,6 +1,6 @@
 ﻿using EnterpriseClient.Controllers;
 using EnterpriseClient.Models;
-using EnterpriseClient.Views.MaterialView;
+using EnterpriseClient.Views.SupplyView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,24 +11,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace EnterpriseClient.Views.SupplyView;
+namespace EnterpriseClient.Views.ProductView;
 
-public partial class SupplyControl : UserControl
+public partial class ProductControl : UserControl
 {
     private MainForm mainForm;
-    public SupplyController supplyController;
-    public SupplyCompaundController SupplyCompaundController;
-    public ProviderController providerController;
+
+    public ProductController productController;
     public MaterialController materialController;
-    private SupplyAdd supplyAdd;
+    public MaterialCompaundController materialComapundController;
+    public EnterpriseController enterpriseController;
+    
 
-    public List<Supply> supplies { get; set; }
+    private ProductAdd productAdd;
 
-    public Supply choisedSupply { get; set; }
+    public List<Product> products { get; set; }
+
+    public Product choisedProduct { get; set; }
 
 
 
-    public SupplyControl(MainForm mainForm)
+    public ProductControl(MainForm mainForm)
     {
         this.mainForm = mainForm;
 
@@ -46,12 +49,14 @@ public partial class SupplyControl : UserControl
 
     public void InitializeData()
     {
-        choisedSupply = new Supply();
-        supplyController = new SupplyController(mainForm.httpClient);
-        SupplyCompaundController = new SupplyCompaundController(mainForm.httpClient);
-        providerController = new ProviderController(mainForm.httpClient);
+        choisedProduct = new Product();
+
+        productController = new ProductController(mainForm.httpClient);
         materialController = new MaterialController(mainForm.httpClient);
-        supplyAdd = new SupplyAdd(this);
+        materialComapundController = new MaterialCompaundController(mainForm.httpClient);
+        enterpriseController = new EnterpriseController(mainForm.httpClient);
+
+        productAdd = new ProductAdd(this);
     }
 
 
@@ -59,11 +64,11 @@ public partial class SupplyControl : UserControl
     {
         flowLayoutPanel1.Controls.Clear();
 
-        supplies = await supplyController.GetAll();
+        products = await productController.GetAll();
 
-        foreach (var supply in supplies)
+        foreach (var product in products)
         {
-            flowLayoutPanel1.Controls.Add(new SupplyRow(this, supply));
+            flowLayoutPanel1.Controls.Add(new ProductRow(this, product));
         }
     }
 
@@ -77,16 +82,15 @@ public partial class SupplyControl : UserControl
     {
         //pictureBox.Visible = false;
         groupBoxAction.Controls.Clear();
-        groupBoxAction.Controls.Add(supplyAdd);
+        groupBoxAction.Controls.Add(productAdd);
     }
 
     private void Edit(object sender, EventArgs e)
     {
-        if (choisedSupply.Id == Guid.Empty) { return; }
+        if (choisedProduct.Id == Guid.Empty) { return; }
 
         //pictureBox.Visible = false;
         groupBoxAction.Controls.Clear();
-        groupBoxAction.Controls.Add(new SupplyEdit(this, choisedSupply));
+        groupBoxAction.Controls.Add(new ProductEdit(this, choisedProduct));
     }
-
 }
