@@ -69,13 +69,13 @@ public partial class SupplyControl : UserControl
 
     public void HideActionGroupBox()
     {
-        //pictureBox1.Visible = true;
+        pictureBox1.Visible = true;
         groupBoxAction.Controls.Clear();
     }
 
     private void AddNew(object sender, EventArgs e)
     {
-        //pictureBox.Visible = false;
+        pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
         groupBoxAction.Controls.Add(supplyAdd);
     }
@@ -84,7 +84,7 @@ public partial class SupplyControl : UserControl
     {
         if (choisedSupply.Id == Guid.Empty) { return; }
 
-        //pictureBox.Visible = false;
+        pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
         groupBoxAction.Controls.Add(new SupplyEdit(this, choisedSupply));
     }

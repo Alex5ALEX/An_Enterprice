@@ -35,7 +35,9 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             groupBoxAction = new GroupBox();
             buttonMenu = new Button();
+            pictureBox1 = new PictureBox();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // labelMenuName
@@ -107,11 +109,22 @@
             buttonMenu.Text = "Menu";
             buttonMenu.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = Properties.Resources.employee;
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.Location = new Point(20, 90);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(300, 300);
+            pictureBox1.TabIndex = 16;
+            pictureBox1.TabStop = false;
+            // 
             // EmployeeControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
+            Controls.Add(pictureBox1);
             Controls.Add(labelMenuName);
             Controls.Add(buttonAdd);
             Controls.Add(buttonEdit);
@@ -121,6 +134,7 @@
             Name = "EmployeeControl";
             Size = new Size(1260, 680);
             groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -134,5 +148,6 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private GroupBox groupBoxAction;
         private Button buttonMenu;
+        private PictureBox pictureBox1;
     }
 }

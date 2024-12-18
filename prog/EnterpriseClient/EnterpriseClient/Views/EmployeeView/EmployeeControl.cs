@@ -76,12 +76,12 @@ public partial class EmployeeControl : UserControl
     public void HideActionGroupBox()
     {
         groupBoxAction.Controls.Clear();
-        //pictureBox1.Visible = true;
+        pictureBox1.Visible = true;
     }
 
     private void AddNew(object? sender, EventArgs e)
     {
-        //pictureBox1.Visible = false;
+        pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
         groupBoxAction.Controls.Add(employeeAdd);
     }
@@ -90,7 +90,7 @@ public partial class EmployeeControl : UserControl
     {
         if (choisedEmployee.Id == Guid.Empty) { return; }
 
-        //pictureBox1.Visible = false;
+        pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
         groupBoxAction.Controls.Add(new EmployeeEdit(this, choisedEmployee));
     }

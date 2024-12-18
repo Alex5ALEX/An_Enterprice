@@ -72,13 +72,13 @@ public partial class ReportControl : UserControl
     public void HideActionGroupBox()
     {
         groupBox1.Controls.Clear();
-        //pictureBox1.Visible = true;
+        pictureBox1.Visible = true;
     }
 
 
     private void InitFinanceReport(object sender, EventArgs e)
     {
-        //pictureBox1.Visible = false;
+        pictureBox1.Visible = false;
         groupBox1.Controls.Clear();
         groupBox1.Controls.Add(new FinanceControl(this));
     }
@@ -86,7 +86,7 @@ public partial class ReportControl : UserControl
 
     private void InitQuantityReport(object sender, EventArgs e)
     {
-        //pictureBox1.Visible = false;
+        pictureBox1.Visible = false;
         groupBox1.Controls.Clear();
         groupBox1.Controls.Add(new StatisticControl(this));
     }

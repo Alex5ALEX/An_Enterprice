@@ -72,13 +72,13 @@ public partial class OrderControl : UserControl
 
     public void HideActionGroupBox()
     {
-        //pictureBox1.Visible = true;
+        pictureBox1.Visible = true;
         groupBoxAction.Controls.Clear();
     }
 
     private void AddNew(object sender, EventArgs e)
     {
-        //pictureBox.Visible = false;
+        pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
         groupBoxAction.Controls.Add(orderAdd);
     }
@@ -87,7 +87,7 @@ public partial class OrderControl : UserControl
     {
         if (choisedOrder.Id == Guid.Empty) { return; }
 
-        //pictureBox.Visible = false;
+        pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
         groupBoxAction.Controls.Add(new OrderEdit(this, choisedOrder));
     }

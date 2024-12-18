@@ -34,6 +34,8 @@
             groupBox1 = new GroupBox();
             buttonMenu = new Button();
             labelMenuName = new Label();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // button3
@@ -96,11 +98,22 @@
             labelMenuName.TabIndex = 17;
             labelMenuName.Text = "Report";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = Properties.Resources.report;
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.Location = new Point(430, 90);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(400, 400);
+            pictureBox1.TabIndex = 23;
+            pictureBox1.TabStop = false;
+            // 
             // ReportControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
+            Controls.Add(pictureBox1);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -109,6 +122,7 @@
             Controls.Add(labelMenuName);
             Name = "ReportControl";
             Size = new Size(1260, 680);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -121,5 +135,6 @@
         private GroupBox groupBox1;
         private Button buttonMenu;
         private Label labelMenuName;
+        private PictureBox pictureBox1;
     }
 }

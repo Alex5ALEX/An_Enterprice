@@ -74,13 +74,13 @@ public partial class ProductControl : UserControl
 
     public void HideActionGroupBox()
     {
-        //pictureBox1.Visible = true;
+        pictureBox1.Visible = true;
         groupBoxAction.Controls.Clear();
     }
 
     private void AddNew(object sender, EventArgs e)
     {
-        //pictureBox.Visible = false;
+        pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
         groupBoxAction.Controls.Add(productAdd);
     }
@@ -89,7 +89,7 @@ public partial class ProductControl : UserControl
     {
         if (choisedProduct.Id == Guid.Empty) { return; }
 
-        //pictureBox.Visible = false;
+        pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
         groupBoxAction.Controls.Add(new ProductEdit(this, choisedProduct));
     }
